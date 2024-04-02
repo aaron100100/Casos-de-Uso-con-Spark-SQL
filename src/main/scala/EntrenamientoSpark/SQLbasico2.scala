@@ -63,17 +63,22 @@ object SQLbasico2 extends App{
   println(grabDF.select($"interprete").distinct().count())*/
 
   //Ejercicio 4
-  //** aqui falta
+  //comenzando a intentar resolverlo
+  /*vinosDF.show()
+  println(vinosDF.filter(length($"uva") - length(regexp_replace($"uva", " ", "")) > 0).select($"uva").count())*/
 
   //Ejercicio 5
+
   /*vinosDF.show()
   vinosDF.groupBy($"vinedo").agg(sum($"produc")).orderBy($"vinedo")show()*/
 
   //Ejercicio 6
+
   /*vinedoDF.show()
   vinedoDF.filter($"region".isNotNull).groupBy($"region").agg(sum($"superf")).orderBy($"region").show()*/
 
   //Ejercicio 7
+
   /*amDF.show()
   amDF.groupBy($"cta").agg(floor(avg($"cal"))).orderBy($"cta")show()*/
 
@@ -83,9 +88,38 @@ object SQLbasico2 extends App{
   autDF.groupBy($"nacion").agg(substring($"nacion",1,2).alias("DosPalabras"), substring($"nacion",1,4).alias("CuatroPalabras"))show()*/
 
   //Ejercicio 9
-  //aqui falta
+
+  //comenzando a resolverlo
+  /*vinosDF.show()
+  vinosDF.select($"nombre", $"uva", $"tipo", round($"produc"/12,2))
+    .filter($"uva".like("C%") && ( length($"uva") - length(regexp_replace($"uva", "N", "") ) ) >= 2 )
+    .orderBy(round($"produc"/12,2)).show()*/
+
 
   //Ejercicio 10
+
+  /*grabDF.show()
+  grabDF.select($"cat", $"obra", $"interprete", length($"interprete"))
+    .filter(length($"interprete") > 9)
+    .orderBy($"interprete".asc, $"obra".desc)
+    .show()*/
+
+  //Ejercicio 11
+
+  /*vinosDF.show()
+  vinedoDF.show()
+
+  val resultadoJoin = vinosDF.alias("v")
+    .join(vinedoDF.alias("vin"), $"v.vinedo" === $"vin.nombre")
+    .filter($"vin.region".isNotNull && $"v.tipo" === "TINTO")
+    .select($"vin.nombre", $"v.nombre", $"vin.superf", substring($"v.uva", 1,5), ceil($"v.produc"/11) )
+    .orderBy(substring($"v.uva", 1,5))
+  resultadoJoin.show()*/
+
+
+
+
+
 
 
 
