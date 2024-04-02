@@ -29,6 +29,7 @@ object WindowFunction extends App {
     .select(col("*"), max("ingresos").over(windowSpec).alias("max"))
     .select(col("*"), col("max") - col("ingresos"))
 
+  windowExec.show()
   //windowExec.explain()
   //windowExec.count()
   println()
@@ -36,12 +37,13 @@ object WindowFunction extends App {
   println()
   //acercamiento por groupBy
   val maxCategory = df.groupBy("categoria").agg(max("ingresos").alias("max"))
-  //maxCategory.show()
+  maxCategory.show()
 
   val dfWithMax = df.join(maxCategory, Seq("categoria"))
   val groupByExec = dfWithMax.select(col("*"), col("max") - col("ingresos"))
   //groupByExec.explain()
   //groupByExec.count()
+  groupByExec.show()
 
   //Thread.sleep(100000000)
 

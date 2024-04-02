@@ -25,16 +25,26 @@ object Agregaciones extends App{
   select count(*), max(price), min(price)  from products
    */
   println(productDF.count())
+  /*
+  productDF.select(count("*"),
+    max("price"),
+    min("price"),
+    sum("price"),
+    avg("price")).explain(true) // te explica lo que hace por detrás mi consulta*/
 
   productDF.select(count("*"),
     max("price"),
     min("price"),
     sum("price"),
-    avg("price")).explain(true) // te explica lo que hace por detrás mi consulta
+    avg("price")).explain(true)
 
-  //productDF.show()
+  productDF.show()
   //productDF.printSchema() esquema de latabla
 
 
+
+  //comentarios
+//el explain solito es mejor, para trabajar mejor la optimización de las consultas
+  //spark sql tiene dos formas; con la api y usando el context(spark)
 
 }
