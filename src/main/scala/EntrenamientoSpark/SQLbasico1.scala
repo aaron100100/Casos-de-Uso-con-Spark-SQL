@@ -5,7 +5,7 @@ import org.apache.spark.sql._
 import org.apache.spark.sql.SparkSession
 import org.apache.spark.sql.functions._
 
-object basico1 extends App {
+object SQLbasico1 extends App {
 
   val spark = SparkSession.builder()
     .master("local[1]")
@@ -53,25 +53,40 @@ object basico1 extends App {
     "nombre", "autor", "a_crea"
   ).filter(col("autor") === "BACH").show()*/
 
+
   //Ejercicio 2
 
   /*grabDF.show()
   grabDF.select(
     "cat", "obra", "interprete", "durac"
-  ).filter(col("durac") > 700 && col("durac") < 900).orderBy($"interprete".asc).show()*/
+  ).filter(col("durac") > 700 && col("durac") < 900).orderBy($"interprete".asc).show()
+
+  grabDF.select(
+    "cat", "obra", "interprete", "durac"
+  ).filter(col("durac").between(700,900)).orderBy($"interprete".asc).show()*/
 
   //Ejercicio 3
+
   /*grabDF.show()
   val costumGrabDF = grabDF.withColumn("conversion", col("durac")/60)
     .withColumn("---", lit("MINUTOS")).filter(col("durac") > 700 && col("durac") < 900).orderBy($"interprete")
-  costumGrabDF.select($"cat", $"obra", $"interprete", $"conversion", $"---").show()*/
+  costumGrabDF.select($"cat", $"obra", $"interprete", $"conversion", $"---").show()
+
+  val costumGrabDF2 = grabDF.withColumn("conversion", col("durac")/60)
+    .withColumn("---", lit("MINUTOS")).filter(col("durac").between(700,900)).orderBy($"interprete")
+  costumGrabDF2.select($"cat", $"obra", $"interprete", $"conversion", $"---").show()*/
+//aqui se puede obtener otra opción que hizo un compañero en la sesión
+
+
 
   //Ejercicio 4
+
   /*val costumGrabDF = grabDF.withColumn("conversion", $"durac"/60).withColumn("---", lit("MINUTOS"))
   costumGrabDF.select("cat", "obra", "interprete", "conversion", "---").filter($"conversion" > 15).orderBy($"conversion")show()*/
 
   //Ejercicio 5
-  /*mDF.show()
+
+ /* mDF.show()
   mDF.filter($"grupo" === "A" && ($"depto" === "SISTEMAS" || $"depto" === "FISICA")).orderBy($"descri").show()*/
 
 
@@ -83,13 +98,15 @@ object basico1 extends App {
 
 
   //Ejercicio 7
+
   /*conciertoDF.select($"fecha",
   $"hora", $"lugar", $"interprete").filter($"lugar" === "SALA NETZA." || $"interprete" === "JUAN GABRIEL")
     .orderBy($"fecha", $"hora").show()*/
 
   //Ejercicio 8
-  //vinedoDF.filter(($"pais" === "FRANCIA" || $"pais"!= "FRANCIA" ) && $"region".isNotNull ).orderBy($"region").show()
 
+  //vinedoDF.filter(($"pais" === "FRANCIA" || $"pais"!= "FRANCIA" ) && $"region".isNotNull ).orderBy($"region").show()
+  //vinosDF.where()
 
   //Ejercicio 9
 
@@ -97,6 +114,7 @@ object basico1 extends App {
   custom_vinedoDF.filter($"region".isNotNull).orderBy($"region").show()*/
 
   //Ejercicio 10
+
   /*vinosDF.show()
   val resultado10DF = vinosDF.filter($"Nombre".like("%C%"))
     .select($"Uva")
@@ -105,6 +123,7 @@ object basico1 extends App {
   resultado10DF.show()*/
 
   //Ejercicio 11
+
   /*discoDF.show()
   val resultado = discoDF.withColumn("---", lit("PRECIO DE OFERTA="))
     .withColumn("nuevo_precio", $"precio"*0.25 + $"precio")
@@ -114,6 +133,7 @@ object basico1 extends App {
 
 
   //Ejercicio 12
+
   /*aDF.show()
   amDF.show()
   val resultado = aDF.join(amDF, aDF.col("cta") === amDF.col("cta"))
@@ -122,6 +142,7 @@ object basico1 extends App {
 
 
   //Ejercicio 13
+
   /*grabDF.show()
   obraDF.show()
   val resultado = grabDF.join(obraDF, grabDF.col("obra") === obraDF.col("nombre"))
@@ -131,6 +152,7 @@ object basico1 extends App {
 
 
   //Ejercicio 14
+
   /*//obraDF.show()
   val obraDFRenamed = obraDF.withColumnRenamed("nombre", "nombreObra")
   obraDFRenamed.show()
@@ -144,10 +166,10 @@ object basico1 extends App {
 
   //Ejercicio 15
 
-  //vinosDF.show()
-  /*val vinosDFRenamed = vinosDF.withColumnRenamed("nombre", "nombrev2")
-  //vinosDFRenamed.show()
-  //vinedoDF.show()
+  /*vinosDF.show()
+  val vinosDFRenamed = vinosDF.withColumnRenamed("nombre", "nombrev2")
+  vinosDFRenamed.show()
+  vinedoDF.show()
   val resultadoJoin = vinosDFRenamed.join(vinedoDF, vinosDFRenamed.col("vinedo") === vinedoDF.col("nombre")).withColumn("Extra", $"produc"*12)
   resultadoJoin.show()
 
@@ -155,7 +177,6 @@ object basico1 extends App {
   "nombre", "superf").show()
   resultadoJoin.select("nombre", "nombrev2", "superf","Extra").filter($"tipo" === "TINTO" && $"superf" >= 10000 && $"produc" >= 10000).show()*/
 
-  //.filter($"tipo" === "TINTO" && $"superf" >= 10000 && $"produc" >= 10000).show()
 
 
 
