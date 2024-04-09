@@ -56,6 +56,7 @@ object SQLbasico3 extends App{
 
 
   //Ejercicio 3
+
   /*conciertoDF.show()
   conciertoDF.filter(year($"fecha") === 1990 && month($"fecha") === 8)
     .select($"hora",
@@ -66,51 +67,54 @@ object SQLbasico3 extends App{
 
   //Ejercicio 4
 
-  autDF.show()
+  /*autDF.show()
   obraDF.show()
   val table1 = autDF.filter($"genero" === "NACIONALISTA")
-    .select(year($"f_nac").alias("AÑO"), lit("NACIO UN MUSICO NACIONALISTA").alias("      Mensaje Nacimiento o Escritura      "))
+    .select(year($"f_nac").alias("AÑO"), lit("NACIO UN MUSICO NACIONALISTA").alias("Mensaje Nacimiento o Escritura"))
   //table1.show()
   val table2 =autDF.alias("aut")
     .filter($"aut.genero" === "NACIONALISTA")
     .join(obraDF.alias("obra"), $"aut.nombre" === $"obra.autor")
-    .select($"a_crea", lit("SE ESCRIBIO UNA OBRA NACIONALISTA").alias("      Mensaje Nacimiento o Escritura      "))
+    .select($"a_crea", lit("SE ESCRIBIO UNA OBRA NACIONALISTA").alias("Mensaje Nacimiento o Escritura"))
   //table2.show()
 
-  table1.union(table2).orderBy($"AÑO").show(1000, false)
+  table1.union(table2).orderBy($"AÑO").show(1000, false)*/
 
 
   //Ejercicio 5
+
   /*obraDF.show()
   autDF.show()
   grabDF.show()*/
 
   //Subconsulta
-  val fechaFiltro = autDF.filter($"nombre" === "RACHMANINOFF").select(year($"f_nac")).first().getInt(0)
+  /*val fechaRachmaninoff = autDF.filter($"nombre" === "RACHMANINOFF").select(year($"f_nac")).first().getInt(0)
   //println(fechaFiltro)
 
-  /*val resultado = obraDF.alias("o").join(autDF.alias("a"), $"o.autor" === $"a.nombre")
+  val resultado = obraDF.alias("o").join(autDF.alias("a"), $"o.autor" === $"a.nombre")
     .join(grabDF.alias("g"), $"o.nombre" === $"g.obra")
-    .filter($"o.a_crea" > fechaFiltro)
+    .filter($"o.a_crea" > fechaRachmaninoff)
     .select($"o.nombre", $"o.a_crea", $"o.autor")
 
   resultado.show()*/
 
 //Ejercicio 6
+
   //Primera parte, se trabajan las tablas por separado
   //mDF.show()
-  /*val table1 = mDF.select($"depto")
+  val table1 = mDF.select($"depto")
     .distinct()
   table1.show()
 
   val deptos = table1.select("depto").distinct().collect().map(_.getString(0))
+  println(deptos)
 
   val table2 = aDF.filter(!($"depto".isin(deptos: _*)))
     .select($"depto")
     .distinct()
   table2.show()
 
- table1.union(table2).show()*/
+ table1.union(table2).show()
 
 
 
